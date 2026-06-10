@@ -18,7 +18,8 @@ require("./routes/historyRoutes");
 
 const mockInterviewRoutes =
 require("./routes/mockInterviewRoutes");
-
+const progressRoutes =
+require("./routes/progressRoutes");
 
 connectDB();
 
@@ -39,7 +40,10 @@ app.use(
   "/api/mock",
   mockInterviewRoutes
 );
-
+app.use(
+  "/api/progress",
+  progressRoutes
+);
 
 
 app.get("/", (req, res) => {

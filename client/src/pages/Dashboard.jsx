@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import JDUpload from "../components/JDUpload";
 import InterviewPrep from "../components/InterviewPrep";
 import History from "../components/History";
+import ProgressDashboard from "../components/ProgressDashboard";
 
 function Dashboard() {
 
@@ -24,6 +25,8 @@ const [jobMatch, setJobMatch] = useState("");
       <h2 className="text-2xl mb-8">
         PrepPilot AI Dashboard
       </h2>
+
+      <ProgressDashboard />
 
 <div className="grid md:grid-cols-4 gap-6">
         <ResumeUpload
