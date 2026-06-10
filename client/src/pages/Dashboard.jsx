@@ -39,7 +39,7 @@ const [jobMatch, setJobMatch] = useState("");
 
         <InterviewPrep />
 
-{/* <History /> */}
+<History />
 
 
       </div>
