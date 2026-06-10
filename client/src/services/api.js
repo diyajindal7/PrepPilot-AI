@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "import.meta.env.VITE_API_URL",
+baseURL: "https://preppilot-ai-e8yc.onrender.com/api",
 });
 
 export default api;
