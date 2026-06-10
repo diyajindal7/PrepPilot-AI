@@ -38,10 +38,11 @@ await Analysis.create({
   result: analysisResult,
 });
 
-    res.status(201).json({
+   res.status(201).json({
   message: "Resume analyzed successfully",
   extractedCharacters: pdfData.text.length,
   analysis: analysisResult,
+  resumeText: pdfData.text,
 });
 
   } catch (error) {

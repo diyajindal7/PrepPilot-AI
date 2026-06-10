@@ -29,6 +29,15 @@ function ResumeUpload({ setAnalysis }) {
       );
 
       setAnalysis(res.data.analysis);
+      localStorage.setItem(
+  "resumeText",
+  res.data.resumeText
+);
+
+localStorage.setItem(
+  "resumeText",
+  res.data.resumeText
+);
 
     } catch (error) {
       console.log(error);

@@ -8,7 +8,11 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
+const jdRoutes =
+require("./routes/jdRoutes");
 
+const interviewRoutes =
+require("./routes/interviewRoutes");
 
 connectDB();
 
@@ -18,7 +22,11 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
-
+app.use("/api/jd", jdRoutes);
+app.use(
+  "/api/interview",
+  interviewRoutes
+);
 
 app.get("/", (req, res) => {
   res.send("PrepPilot AI Backend Running");

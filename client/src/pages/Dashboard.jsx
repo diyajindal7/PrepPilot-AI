@@ -1,10 +1,13 @@
 import { useState } from "react";
 import ResumeUpload from "../components/ResumeUpload";
 import ReactMarkdown from "react-markdown";
+import JDUpload from "../components/JDUpload";
+import InterviewPrep from "../components/InterviewPrep";
 
 function Dashboard() {
 
-  const [analysis, setAnalysis] = useState("");
+ const [analysis, setAnalysis] = useState("");
+const [jobMatch, setJobMatch] = useState("");
 
   const user = JSON.parse(
     localStorage.getItem("user")
@@ -26,13 +29,11 @@ function Dashboard() {
           setAnalysis={setAnalysis}
         />
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          Job Description Upload
-        </div>
+       <JDUpload
+  setJobMatch={setJobMatch}
+/>
 
-        <div className="bg-white p-6 rounded-xl shadow">
-          Interview History
-        </div>
+        <InterviewPrep />
 
       </div>
 
@@ -72,6 +73,20 @@ function Dashboard() {
         </div>
       )}
 
+
+     {jobMatch && (
+  <div className="bg-white p-6 rounded-xl shadow mt-8">
+
+    <h2 className="text-3xl font-bold text-green-600 mb-4">
+      Job Match Analysis
+    </h2>
+
+   <div className="prose max-w-none">
+  
+</div>
+
+  </div>
+)}
     </div>
   );
 }
