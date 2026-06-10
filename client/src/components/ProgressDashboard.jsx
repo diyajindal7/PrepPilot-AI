@@ -20,7 +20,7 @@ function ProgressDashboard() {
 
           const res =
             await axios.get(
-              `http://localhost:5000/api/progress/${user.id}`
+              `import.meta.env.VITE_API_URL/progress/${user.id}`
             );
 
           setProgress(

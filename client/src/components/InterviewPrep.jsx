@@ -58,7 +58,7 @@ JSON.parse(
 
 const res =
 await axios.post(
-  "http://localhost:5000/api/mock/evaluate",
+  "import.meta.env.VITE_API_URL/mock/evaluate",
   {
     question,
     answer,
