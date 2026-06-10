@@ -22,7 +22,7 @@ function JDUpload({ setJobMatch }) {
       setLoading(true);
 
       const res = await axios.post(
-        "import.meta.env.VITE_API_URL/jd/analyze",
+        "`${`${import.meta.env.VITE_API_URL}/...`}/...`jd/analyze",
         {
           resumeText,
           jobDescription: jd,
