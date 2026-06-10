@@ -74,16 +74,39 @@ const [jobMatch, setJobMatch] = useState("");
       )}
 
 
-     {jobMatch && (
+   {jobMatch && (
   <div className="bg-white p-6 rounded-xl shadow mt-8">
 
     <h2 className="text-3xl font-bold text-green-600 mb-4">
       Job Match Analysis
     </h2>
 
-   <div className="prose max-w-none">
-  
-</div>
+    <ReactMarkdown
+      components={{
+        h1: ({ children }) => (
+          <h1 className="text-3xl font-bold mb-4">
+            {children}
+          </h1>
+        ),
+        h2: ({ children }) => (
+          <h2 className="text-2xl font-semibold mt-6 mb-3">
+            {children}
+          </h2>
+        ),
+        p: ({ children }) => (
+          <p className="mb-3">
+            {children}
+          </p>
+        ),
+        li: ({ children }) => (
+          <li className="ml-6 list-disc mb-2">
+            {children}
+          </li>
+        ),
+      }}
+    >
+      {jobMatch}
+    </ReactMarkdown>
 
   </div>
 )}

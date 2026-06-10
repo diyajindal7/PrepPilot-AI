@@ -38,6 +38,15 @@ await Analysis.create({
   result: analysisResult,
 });
 
+
+const History = require("../models/History");
+
+await History.create({
+  userId: req.body.userId,
+  type: "ATS Analysis",
+  result: analysisResult,
+});
+
    res.status(201).json({
   message: "Resume analyzed successfully",
   extractedCharacters: pdfData.text.length,

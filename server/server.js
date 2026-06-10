@@ -13,6 +13,9 @@ require("./routes/jdRoutes");
 
 const interviewRoutes =
 require("./routes/interviewRoutes");
+const historyRoutes =
+require("./routes/historyRoutes");
+
 
 connectDB();
 
@@ -27,6 +30,10 @@ app.use(
   "/api/interview",
   interviewRoutes
 );
+
+app.use("/api/history", historyRoutes);
+
+
 
 app.get("/", (req, res) => {
   res.send("PrepPilot AI Backend Running");

@@ -1,12 +1,16 @@
 const { analyzeJobMatch } =
 require("../services/geminiService");
 
+const History =
+require("../models/History");
+
 const analyzeJD = async (req, res) => {
   try {
 
     const {
       resumeText,
       jobDescription,
+      userId,
     } = req.body;
 
     const result =
@@ -14,6 +18,12 @@ const analyzeJD = async (req, res) => {
         resumeText,
         jobDescription
       );
+
+    await History.create({
+      userId,
+      type: "Job Match",
+      result,
+    });
 
     res.json({
       result,
@@ -27,6 +37,8 @@ const analyzeJD = async (req, res) => {
 
   }
 };
+
+
 
 module.exports = {
   analyzeJD,
