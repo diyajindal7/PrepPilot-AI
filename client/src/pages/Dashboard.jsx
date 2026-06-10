@@ -3,6 +3,7 @@ import ResumeUpload from "../components/ResumeUpload";
 import ReactMarkdown from "react-markdown";
 import JDUpload from "../components/JDUpload";
 import InterviewPrep from "../components/InterviewPrep";
+import History from "../components/History";
 
 function Dashboard() {
 
@@ -24,7 +25,7 @@ const [jobMatch, setJobMatch] = useState("");
         PrepPilot AI Dashboard
       </h2>
 
-<div className="grid md:grid-cols-3 gap-6">
+<div className="grid md:grid-cols-4 gap-6">
         <ResumeUpload
           setAnalysis={setAnalysis}
         />
@@ -34,6 +35,9 @@ const [jobMatch, setJobMatch] = useState("");
 />
 
         <InterviewPrep />
+
+<History />
+
 
       </div>
 

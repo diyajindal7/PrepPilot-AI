@@ -1,5 +1,7 @@
 const Resume = require("../models/Resume");
 const Analysis = require("../models/Analysis");
+const History = require("../models/History");
+
 const {
   analyzeResume,
 } = require("../services/geminiService");
@@ -39,7 +41,7 @@ await Analysis.create({
 });
 
 
-const History = require("../models/History");
+
 
 await History.create({
   userId: req.body.userId,

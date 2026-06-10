@@ -2,6 +2,9 @@ const {
   evaluateAnswer,
 } = require("../services/geminiService");
 
+const History =
+require("../models/History");
+
 const evaluate = async (
   req,
   res
@@ -11,6 +14,7 @@ const evaluate = async (
     const {
       question,
       answer,
+      userId,
     } = req.body;
 
     const result =
@@ -18,6 +22,12 @@ const evaluate = async (
         question,
         answer
       );
+
+    await History.create({
+      userId,
+      type: "Mock Interview",
+      result,
+    });
 
     res.json({
       result,

@@ -47,19 +47,24 @@ function InterviewPrep() {
         alert("Enter answer");
         return;
       }
-
+const user =
+JSON.parse(
+  localStorage.getItem("user")
+);
       try {
 
         setLoading(true);
+         
 
-        const res =
-          await axios.post(
-            "http://localhost:5000/api/mock/evaluate",
-            {
-              question,
-              answer,
-            }
-          );
+const res =
+await axios.post(
+  "http://localhost:5000/api/mock/evaluate",
+  {
+    question,
+    answer,
+    userId: user.id,
+  }
+);
 
         setResult(
           res.data.result

@@ -1,5 +1,5 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-console.log(process.env.GEMINI_API_KEY);
+
 const genAI = new GoogleGenerativeAI(
   process.env.GEMINI_API_KEY
 );
@@ -37,8 +37,13 @@ ${resumeText}
 return result.response.text();
 
   } catch (error) {
-    console.error(error);
-    throw error;
+
+  if (error.status === 429) {
+    return "Gemini API quota exceeded. Please try again later.";
+  }
+
+  throw error;
+
   }
 };
 
@@ -77,10 +82,14 @@ ${jobDescription}
 
     return result.response.text();
 
-  } catch (error) {
-    console.error(error);
-    throw error;
+ } catch (error) {
+
+  if (error.status === 429) {
+    return "Gemini API quota exceeded. Please try again later.";
   }
+
+  throw error;
+}
 };
 
 
@@ -88,12 +97,14 @@ ${jobDescription}
 const generateInterviewQuestions =
 async (resumeText) => {
 
-  const model =
-    genAI.getGenerativeModel({
-      model: "gemini-2.5-flash-lite",
-    });
+  try {
 
-  const prompt = `
+    const model =
+      genAI.getGenerativeModel({
+        model: "gemini-2.5-flash-lite",
+      });
+
+    const prompt = `
 You are a technical interviewer.
 
 Based on this resume generate:
@@ -112,14 +123,22 @@ Resume:
 ${resumeText}
 `;
 
-  const result =
-    await model.generateContent(
-      prompt
-    );
+    const result =
+      await model.generateContent(
+        prompt
+      );
 
-  return result.response.text();
+    return result.response.text();
+
+  } catch (error) {
+
+    if (error.status === 429) {
+      return "Gemini API quota exceeded. Please try again later.";
+    }
+
+    throw error;
+  }
 };
-
 
 
 
@@ -128,38 +147,40 @@ const evaluateAnswer = async (
   answer
 ) => {
 
-  const model =
-    genAI.getGenerativeModel({
-      model: "gemini-2.5-flash-lite",
-    });
+  try {
 
-  const prompt = `
-You are a technical interviewer.
+    const model =
+      genAI.getGenerativeModel({
+        model: "gemini-2.5-flash-lite",
+      });
 
-Question:
-${question}
-
-Candidate Answer:
-${answer}
-
-Evaluate the answer and provide:
-
-# Score
-(out of 10)
-
-# Strengths
-
-# Weaknesses
-
-# Suggestions
+    const prompt = `
+...
 `;
 
-  const result =
-    await model.generateContent(
-      prompt
-    );
+    const result =
+      await model.generateContent(
+        prompt
+      );
 
-  return result.response.text();
+    return result.response.text();
+
+  } catch (error) {
+
+    if (error.status === 429) {
+      return "Gemini API quota exceeded. Please try again later.";
+    }
+
+    throw error;
+  }
+};
+const handleGeminiError = (error) => {
+
+  if (error.status === 429) {
+    return "Gemini API quota exceeded. Please try again later.";
+  }
+
+  throw error;
 };
 
 module.exports = {
