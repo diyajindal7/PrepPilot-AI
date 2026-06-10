@@ -120,8 +120,51 @@ ${resumeText}
   return result.response.text();
 };
 
+
+
+
+const evaluateAnswer = async (
+  question,
+  answer
+) => {
+
+  const model =
+    genAI.getGenerativeModel({
+      model: "gemini-2.5-flash-lite",
+    });
+
+  const prompt = `
+You are a technical interviewer.
+
+Question:
+${question}
+
+Candidate Answer:
+${answer}
+
+Evaluate the answer and provide:
+
+# Score
+(out of 10)
+
+# Strengths
+
+# Weaknesses
+
+# Suggestions
+`;
+
+  const result =
+    await model.generateContent(
+      prompt
+    );
+
+  return result.response.text();
+};
+
 module.exports = {
   analyzeResume,
   analyzeJobMatch,
   generateInterviewQuestions,
+  evaluateAnswer,
 };

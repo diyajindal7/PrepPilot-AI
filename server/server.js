@@ -16,6 +16,9 @@ require("./routes/interviewRoutes");
 const historyRoutes =
 require("./routes/historyRoutes");
 
+const mockInterviewRoutes =
+require("./routes/mockInterviewRoutes");
+
 
 connectDB();
 
@@ -32,6 +35,10 @@ app.use(
 );
 
 app.use("/api/history", historyRoutes);
+app.use(
+  "/api/mock",
+  mockInterviewRoutes
+);
 
 
 
