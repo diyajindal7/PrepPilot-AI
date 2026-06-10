@@ -21,7 +21,8 @@ function History() {
          const res = await axios.get(
   `${import.meta.env.VITE_API_URL}/history/${user.id}`
 );
-          setHistory(Array.isArray(res.data) ? res.data : []);
+         console.log("History API:", res.data);
+setHistory(Array.isArray(res.data) ? res.data : []);
 
         } catch (error) {
 

@@ -26,7 +26,7 @@ const [jobMatch, setJobMatch] = useState("");
         PrepPilot AI Dashboard
       </h2>
 
-      <ProgressDashboard />
+      {/* <ProgressDashboard /> */}
 
 <div className="grid md:grid-cols-4 gap-6">
         <ResumeUpload
@@ -39,7 +39,7 @@ const [jobMatch, setJobMatch] = useState("");
 
         <InterviewPrep />
 
-<History />
+{/* <History /> */}
 
 
       </div>
