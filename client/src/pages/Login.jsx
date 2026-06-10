@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { Link } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
@@ -82,6 +83,19 @@ function Login() {
         >
           Login
         </button>
+
+
+<p className="text-center mt-4">
+  Don't have an account?{" "}
+  <Link
+    to="/register"
+    className="text-blue-600 font-semibold"
+  >
+    Register
+  </Link>
+</p>
+
+
       </form>
     </div>
   );
