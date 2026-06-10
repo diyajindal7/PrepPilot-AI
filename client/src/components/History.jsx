@@ -18,11 +18,10 @@ function History() {
               localStorage.getItem("user")
             );
 
-          const res = await axios.get(
-  `${`${import.meta.env.VITE_API_URL}/...`}/history/${user.id}`
+         const res = await axios.get(
+  `${import.meta.env.VITE_API_URL}/history/${user.id}`
 );
-
-          setHistory(res.data);
+          setHistory(Array.isArray(res.data) ? res.data : []);
 
         } catch (error) {
 
@@ -48,7 +47,7 @@ function History() {
           <p>No History Yet</p>
         ) : (
 
-          history.map((item) => (
+         (Array.isArray(history) ? history : []).map((item) => (
 
             
 
