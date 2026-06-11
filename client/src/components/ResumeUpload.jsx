@@ -23,10 +23,10 @@ function ResumeUpload({ setAnalysis }) {
     try {
       setLoading(true);
 
-      const res = await axios.post(
-        "`${`${import.meta.env.VITE_API_URL}/...`}/...`resume/upload",
-        formData
-      );
+    const res = await axios.post(
+  `${import.meta.env.VITE_API_URL}/resume/upload`,
+  formData
+);
 
       setAnalysis(res.data.analysis);
       localStorage.setItem(
