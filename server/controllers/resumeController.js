@@ -1,72 +1,20 @@
-const Resume = require("../models/Resume");
-const Analysis = require("../models/Analysis");
-const History = require("../models/History");
+const express = require("express");
+const multer = require("multer");
 
 const {
-  analyzeResume,
-} = require("../services/geminiService");
-const fs = require("fs");
-const pdfParse = require("pdf-parse");
-
-
-const uploadResume = async (req, res) => {
-  try {
-
-    if (!req.file) {
-      return res.status(400).json({
-        message: "No file uploaded",
-      });
-    }
-
-    const pdfBuffer = fs.readFileSync(req.file.path);
-
-    const pdfData = await pdfParse(pdfBuffer);
-
-    const resume = await Resume.create({
-      userId: req.body.userId,
-      fileName: req.file.originalname,
-      resumeText: pdfData.text,
-    });
-
-
-    console.log("PDF Text Length:", pdfData.text.length);
-console.log(pdfData.text.substring(0, 500));
-
-    const analysisResult =
-  await analyzeResume(pdfData.text);
-
-await Analysis.create({
-  userId: req.body.userId,
-  result: analysisResult,
-});
-
-
-
-
-await History.create({
-  userId: req.body.userId,
-  type: "ATS Analysis",
-  result: analysisResult,
-});
-
-   res.status(201).json({
-  message: "Resume analyzed successfully",
-  extractedCharacters: pdfData.text.length,
-  analysis: analysisResult,
-  resumeText: pdfData.text,
-});
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      message: error.message,
-    });
-
-  }
-};
-
-module.exports = {
   uploadResume,
-};
+} = require("../controllers/resumeController");
+
+const router = express.Router();
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+});
+
+router.post(
+  "/upload",
+  upload.single("resume"),
+  uploadResume
+);
+
+module.exports = router;
